@@ -14,7 +14,27 @@ export const cleanObject = (object: any) => {
   });
   return result;
 };
+export const useArray = <T>(initialArray: T[]) => {
+  const [value, setValue] = useState(initialArray);
 
+  return {
+    value,
+    setValue,
+    add: (item: T) => setValue([...value, item]),
+    clear: () => setValue([]),
+    removeIndex: (index: number) => {
+      const copy = [...value];
+      copy.splice(index, 1);
+      setValue(copy);
+    },
+  };
+};
+
+export const useMount = (callback: () => void) => {
+  useEffect(() => {
+    callback();
+  }, []);
+};
 // const debounce = (func, delay) => {
 //   let timeout;
 //   return (...param) => {
