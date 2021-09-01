@@ -4,14 +4,17 @@ import "./App.css";
 // import { ProjectListScreen } from "./screens/project-list";
 
 // import { TsReactTest } from "./try-use-array";
-import { LoginScreen } from "./screens/login";
+import { UnauthenticatedApp } from "./unauthenticated-app";
+import { useAuth } from "./context/auth-context";
+import { AuthenticatedApp } from "./authenticated-app";
 
 function App() {
+  const { user } = useAuth();
   return (
     <div className="App">
       {/*<TsReactTest />*/}
       {/*<ProjectListScreen />*/}
-      <LoginScreen />
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
 }
