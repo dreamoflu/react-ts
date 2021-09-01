@@ -3,7 +3,7 @@ import { RegisterScreen } from "./register";
 import { LoginScreen } from "./login";
 
 export const UnauthenticatedApp = () => {
-  const [isRegister, setIsregister] = useState(false);
+  const [isRegister, setIsregister] = useState(false); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div>
       {isRegister ? <RegisterScreen /> : <LoginScreen />}
