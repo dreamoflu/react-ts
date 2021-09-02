@@ -4,6 +4,7 @@ import { Form, Input } from "antd";
 
 import { LongButton } from "./index";
 import { useAsync } from "../utils/use-async";
+import { useDocumentTitle } from "../utils";
 
 export const LoginScreen = ({
   onError,
@@ -34,6 +35,7 @@ export const LoginScreen = ({
       console.log(e);
     }
   };
+  // useDocumentTitle("登录", false);
   return (
     <Form onFinish={handleSubmit}>
       {user ? <div>登录成功，用户名：{user?.name}</div> : null}

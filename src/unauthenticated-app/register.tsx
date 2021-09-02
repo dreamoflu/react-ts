@@ -3,6 +3,7 @@ import { useAuth } from "../context/auth-context";
 import { Form, Input } from "antd";
 import { useAsync } from "../utils/use-async";
 import { LongButton } from "./index";
+import { useDocumentTitle } from "../utils";
 
 export const RegisterScreen = ({
   onError,
@@ -30,6 +31,7 @@ export const RegisterScreen = ({
       console.log(e);
     }
   };
+  // useDocumentTitle("注册", false);
   return (
     <Form onFinish={handleSubmit}>
       {user ? <div>登录成功，用户名：{user?.name}</div> : null}
