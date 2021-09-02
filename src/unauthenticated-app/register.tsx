@@ -1,8 +1,14 @@
 // import { FormEvent } from "react";
 import { useAuth } from "../context/auth-context";
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
+import { useAsync } from "../utils/use-async";
+import { LongButton } from "./index";
 
-export const RegisterScreen = () => {
+export const RegisterScreen = ({
+  onError,
+}: {
+  onError: (error: Error) => void;
+}) => {
   const { register, user } = useAuth();
   // HTMLFormElement extends Element
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -13,8 +19,16 @@ export const RegisterScreen = () => {
   //     .value;
   //   register({ username, password });
   // };
-  const handleSubmit = (values: { username: string; password: string }) => {
-    register(values);
+  const { run, isLoading } = useAsync(undefined, { throwOnError: true });
+  const handleSubmit = async (values: {
+    username: string;
+    password: string;
+  }) => {
+    try {
+      await run(register(values));
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <Form onFinish={handleSubmit}>
@@ -34,9 +48,9 @@ export const RegisterScreen = () => {
         <Input placeholder={"密码"} type="password" id={"password"} />
       </Form.Item>
       <Form.Item>
-        <Button htmlType={"submit"} type={"primary"}>
+        <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>
           注册
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   );
