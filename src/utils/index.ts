@@ -79,7 +79,7 @@ export const useDebounce = (value: any, delay?: number) => {
 
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   const oldTitle = document.title;
-
+  console.log("渲染时的oldTitle", oldTitle);
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -87,6 +87,7 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   useEffect(() => {
     return () => {
       if (!keepOnUnmount) {
+        console.log("卸载时的oldTitle", oldTitle);
         document.title = oldTitle;
       }
     };
