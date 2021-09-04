@@ -35,7 +35,7 @@ export const LoginScreen = ({
       console.log(e);
     }
   };
-  // useDocumentTitle("登录", false);
+  useDocumentTitle("登录", false);
   return (
     <Form onFinish={handleSubmit}>
       {user ? <div>登录成功，用户名：{user?.name}</div> : null}

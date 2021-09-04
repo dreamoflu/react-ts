@@ -31,7 +31,7 @@ export const RegisterScreen = ({
       console.log(e);
     }
   };
-  // useDocumentTitle("注册", false);
+  useDocumentTitle("注册", false);
   return (
     <Form onFinish={handleSubmit}>
       {user ? <div>登录成功，用户名：{user?.name}</div> : null}

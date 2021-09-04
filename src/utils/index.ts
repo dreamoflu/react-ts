@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // 在一个函数里，改变传入的对象本身是不好的
 
 // !! 将一个值转换成boolean值
@@ -78,8 +78,11 @@ export const useDebounce = (value: any, delay?: number) => {
 };
 
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
-  const oldTitle = document.title;
-  console.log("渲染时的oldTitle", oldTitle);
+  const oldTitle = useRef(document.title).current;
+  // const oldTitle = document.title 如果这样取值 则闭包中的title一直保存的是页面加载的值
+  // 页面加载时: 旧title
+  // 加载后：新title
+
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -87,9 +90,9 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   useEffect(() => {
     return () => {
       if (!keepOnUnmount) {
-        console.log("卸载时的oldTitle", oldTitle);
+        // 如果不指定依赖，读到的就是旧title
         document.title = oldTitle;
       }
     };
-  }, []);
+  }, [keepOnUnmount, oldTitle]);
 };
