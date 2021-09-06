@@ -5,7 +5,7 @@ import { cleanObject, subset } from "utils/index";
 /**
  * 返回页面url中，指定键的参数值
  */
-export const useUrlQueryParam = <K extends string>(keys: K[]) => {
+export const useUrlQueryParams = <K extends string>(keys: K[]) => {
   const [searchParams, setSearchParam] = useSearchParams();
   return [
     useMemo(
