@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { Spin, Typography } from "antd";
-import { DevTools } from "jira-dev-tool";
 import React from "react";
+import { Button, Spin, Typography } from "antd";
+import { DevTools } from "jira-dev-tool";
 
 export const Row = styled.div<{
   gap?: number | boolean;
@@ -30,6 +30,7 @@ const FullPage = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export const FullPageLoading = () => (
   <FullPage>
     <Spin size={"large"} />
@@ -42,3 +43,7 @@ export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
     <Typography.Text type={"danger"}>{error?.message}</Typography.Text>
   </FullPage>
 );
+
+export const ButtonNoPadding = styled(Button)`
+  padding: 0;
+`;
